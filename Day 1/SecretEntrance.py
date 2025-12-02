@@ -29,9 +29,8 @@ def partTwo_brute(lineas: list):
 		valor = int(line[1:])
 
 		if (line[0]) == "R":
-			for _ in range(valor):
-				position = (position + 1) % 100
-				password = password + 1 if position == 0 else password
+			password += floor((position + valor) / 100)
+			position = (position + valor) % 100
 		else:
 			for _ in range(valor):
 				position = (position - 1) % 100
@@ -62,9 +61,8 @@ def partTwo_brute_cache(lineas: list):
 		except (KeyError):
 			# No se encuentra en el cache.
 			if direccion == "R":
-				for _ in range(valor):
-					position = (position + 1) % 100
-					password = password + 1 if position == 0 else password
+				password += floor((position + valor) / 100)
+				position = (position + valor) % 100
 			else:
 				for _ in range(valor):
 					position = (position - 1) % 100
