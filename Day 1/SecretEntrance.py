@@ -1,6 +1,5 @@
 import sys
-from math import ceil, floor
-from timeit import default_timer as timer
+from math import floor
 
 if (len(sys.argv) <= 1):
 	print("Missing input.", "Usage: SecretEntrance.py <input> [input ...]", sep="\n")
