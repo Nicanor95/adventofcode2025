@@ -1,7 +1,7 @@
 import sys
 
 if (len(sys.argv) <= 1):
-	print("Missing input.", "Usage: SecretEntrance.py <input> [input ...]", sep="\n")
+	print("Missing input.", "Usage: SecretCodes.py <input> [input ...]", sep="\n")
 	exit(1)
 
 def isInvalid(number):
