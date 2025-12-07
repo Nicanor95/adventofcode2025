@@ -26,17 +26,17 @@ for filename in sys.argv[1:]:
 		fresh.sort(key= lambda x: x[0])
 
 		# Consolidate the ranges
-		cFresh = fresh.copy()#list(map(lambda x: consolidate(x[0], x[1]), zip(fresh, fresh[1:])))
-		cFresh = list(zip(cFresh, cFresh[1:]))
+		fresh = list(zip(fresh, fresh[1:]))
 
-		while any(list(map(lambda x: consolidable(x[0], x[1]), cFresh))):
-			cFresh = list(map(lambda x: consolidate(x[0], x[1]), cFresh))
-			print(cFresh)
-			cFresh = list(zip(cFresh, cFresh[1:]))
+		while True:
+			fresh = list(map(lambda x: consolidate(x[0], x[1]), fresh))
 
+			# Zip if it's still consolidable
+			if any(list(map(lambda x: consolidable(x[0], x[1]), list(zip(fresh, fresh[1:]))))):
+				fresh = list(zip(fresh, fresh[1:]))
+			else:
+				break
 
-		#for x in cFresh:
-		#	print(x)
-		#print(cFresh)
-		#print(fresh)
-		#print(ingredients)
+		
+		print(fresh)
+		print(ingredients)
