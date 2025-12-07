@@ -1,5 +1,4 @@
 import sys
-from functools import reduce
 
 if (len(sys.argv) <= 1):
 	print("Missing input.", "Usage: Spoils.py <input> [input ...]", sep="\n")
