@@ -19,6 +19,7 @@ for filename in sys.argv[1:]:
 		fresh, ingredients = [x.split("\n") for x in spoils.read().split("\n\n")]
 
 		# Translate ingredients to int
+		ingredients = ingredients[:-1] if ingredients[-1] == '' else ingredients
 		ingredients = [int(x) for x in ingredients]
 
 		# Capture the ranges into a tuple (start, end) and sort them to ease consolidation
