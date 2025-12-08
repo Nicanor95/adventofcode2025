@@ -4,13 +4,15 @@ if (len(sys.argv) <= 1):
 	print("Missing input.", "Usage: Spoils.py <input> [input ...]", sep="\n")
 	exit(1)
 
-def consolidable(a: tuple[int,int], b:tuple[int,int]) -> bool:
-	return a[0] <= b[0] <= a[1]
 
-def consolidate(a: tuple[int,int], b:tuple[int,int]):
-	if a[0] <= b[0] <= a[1]:
-		return (a[0],max(b[1],a[1]))
-	return a
+def day5_p1 (fresh: list[tuple[int, int]], ingredients: list[int]) -> int:
+	count = 0
+
+	for ingredient in ingredients:
+		if any(map(lambda x: x[0] <= ingredient <= x[1], fresh)):
+			count += 1
+
+	return count
 
 for filename in sys.argv[1:]:
 	with open(filename, "r") as spoils:
@@ -26,17 +28,14 @@ for filename in sys.argv[1:]:
 		fresh.sort(key= lambda x: x[0])
 
 		# Consolidate the ranges
-		fresh = list(zip(fresh, fresh[1:]))
-
-		while True:
-			fresh = list(map(lambda x: consolidate(x[0], x[1]), fresh))
-
-			# Zip if it's still consolidable
-			if any(list(map(lambda x: consolidable(x[0], x[1]), list(zip(fresh, fresh[1:]))))):
-				fresh = list(zip(fresh, fresh[1:]))
+		consolidated = []
+		start, end = (fresh[0]) # Grab the first
+		for range in fresh:
+			if start <= range[0] <= end:
+				end = max(range[1], end)
 			else:
-				break
-
+				consolidated.append((start,end))
+				start, end = range
+		consolidated.append((start,end))
 		
-		print(fresh)
-		print(ingredients)
+		print(f"Password One: {day5_p1(consolidated, ingredients)}")
