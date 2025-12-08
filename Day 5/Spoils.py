@@ -14,6 +14,12 @@ def day5_p1 (fresh: list[tuple[int, int]], ingredients: list[int]) -> int:
 
 	return count
 
+def day5_p2 (fresh: list[tuple[int,int]]) -> int:
+	total = 0
+	for range in fresh:
+		total += (range[1] - range[0]) + 1
+	return total
+
 for filename in sys.argv[1:]:
 	with open(filename, "r") as spoils:
 		# Read ingredients and fresh list
@@ -39,3 +45,4 @@ for filename in sys.argv[1:]:
 		consolidated.append((start,end))
 		
 		print(f"Password One: {day5_p1(consolidated, ingredients)}")
+		print(f"Password Two: {day5_p2(consolidated)}")
